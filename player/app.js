@@ -327,6 +327,12 @@
         }
     });
 
+    /* ---------- PWA ---------- */
+
+    if ("serviceWorker" in navigator && location.protocol !== "file:") {
+        navigator.serviceWorker.register("sw.js").catch(() => {});
+    }
+
     /* ---------- Init ---------- */
 
     const saved = localStorage.getItem(LS_PLAYLIST) || DEFAULT_PLAYLIST;

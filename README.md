@@ -26,6 +26,25 @@ Features:
 
 Run it: open `player/index.html` in a browser, or serve the repo statically and enable GitHub Pages / any static hosting. By default it loads `all.m3u` from this repository.
 
+It is also a **PWA** (manifest + offline service worker): once hosted over HTTPS, it can be installed from the browser — iOS/macOS via Safari «Поделиться → На экран «Домой»/Установить», Android/desktop via the install prompt.
+
+## Desktop builds
+
+Desktop wrappers live in [electron/](electron/) ([Electron](https://www.electronjs.org)):
+
+```sh
+cd electron
+npm install
+npm run sync-web
+npx electron-builder --win            # Windows NSIS installer + portable
+npx electron-builder --mac            # macOS tar.gz (x64 + arm64)
+npx electron-builder --linux tar.gz   # Linux tar.gz
+```
+
+## Android
+
+See [mobile/README.md](mobile/README.md) — Capacitor scaffold, one command to build an APK with Android Studio.
+
 ## How to Use
 
 1. **Clone the Repository**

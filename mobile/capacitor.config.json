@@ -1,0 +1,11 @@
+{
+    "appId": "com.m3ufree.tvcable.player",
+    "appName": "TVCable Player",
+    "webDir": "www",
+    "android": {
+        "allowMixedContent": true
+    },
+    "server": {
+        "androidScheme": "https"
+    }
+}
