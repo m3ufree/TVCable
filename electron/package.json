@@ -1,0 +1,70 @@
+{
+    "name": "tvcable-player",
+    "productName": "TVCable Player",
+    "version": "1.0.0",
+    "description": "TVCable IPTV web player desktop build",
+    "author": "m3ufree",
+    "repository": "github:m3ufree/TVCable",
+    "main": "main.js",
+    "private": true,
+    "scripts": {
+        "sync-web": "node scripts/sync-web.js",
+        "build:win": "npm run sync-web && electron-builder --win",
+        "build:win-portable": "npm run sync-web && electron-builder --win portable",
+        "build:mac-dir": "npm run sync-web && electron-builder --mac dir",
+        "build:linux-tar": "npm run sync-web && electron-builder --linux tar.gz"
+    },
+    "build": {
+        "appId": "com.m3ufree.tvcable.player",
+        "productName": "TVCable Player",
+        "directories": {
+            "output": "../dist"
+        },
+        "files": [
+            "main.js",
+            "web/**/*",
+            "package.json"
+        ],
+        "win": {
+            "signAndEditExecutable": false,
+            "target": [
+                {
+                    "target": "nsis",
+                    "arch": [
+                        "x64"
+                    ]
+                },
+                {
+                    "target": "portable",
+                    "arch": [
+                        "x64"
+                    ]
+                }
+            ]
+        },
+        "nsis": {
+            "oneClick": true,
+            "deleteAppDataOnUninstall": false
+        },
+        "mac": {
+            "target": [
+                {
+                    "target": "tar.gz",
+                    "arch": [
+                        "x64",
+                        "arm64"
+                    ]
+                }
+            ],
+            "category": "public.app-category.entertainment"
+        },
+        "linux": {
+            "target": "tar.gz",
+            "category": "Video"
+        }
+    },
+    "devDependencies": {
+        "electron": "^33.2.0",
+        "electron-builder": "^24.13.3"
+    }
+}

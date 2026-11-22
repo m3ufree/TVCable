@@ -1,0 +1,98 @@
+name: Build
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: web-pwa
+          path: player/
+
+  desktop:
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            args: "--win"
+            out: "dist/*.exe"
+            name: windows
+          - os: macos-latest
+            args: "--mac"
+            out: "dist/*.tar.gz"
+            name: macos
+          - os: ubuntu-latest
+            args: "--linux tar.gz"
+            out: "dist/*.tar.gz"
+            name: linux
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Build
+        working-directory: electron
+        run: |
+          npm install --no-audit --no-fund
+          npm run sync-web
+          npx electron-builder ${{ matrix.args }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: desktop-${{ matrix.name }}
+          path: ${{ matrix.out }}
+
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: android-actions/setup-android@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Build APK
+        working-directory: mobile
+        run: |
+          npm install --no-audit --no-fund
+          npm run sync-web
+          npx cap add android
+          npx cap sync android
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
+      - uses: actions/upload-artifact@v4
+        with:
+          name: android-apk
+          path: mobile/android/app/build/outputs/apk/debug/*.apk
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [desktop, android]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
+          path: artifacts
+      - name: Attach release assets
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            artifacts/**/*.exe
+            artifacts/**/*.apk
+            artifacts/**/*.tar.gz
+            artifacts/**/*.zip
+          draft: true
