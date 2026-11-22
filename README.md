@@ -41,6 +41,8 @@ npx electron-builder --mac            # macOS tar.gz (x64 + arm64)
 npx electron-builder --linux tar.gz   # Linux tar.gz
 ```
 
+Inputs: workflow runs automatically on `v*` tags and from the Actions tab (workflow_dispatch); drafts of artifacts land in Actions → Build → artifacts, tagged builds also create a draft release with all binaries.
+
 ## Android
 
 See [mobile/README.md](mobile/README.md) — Capacitor scaffold, one command to build an APK with Android Studio.
