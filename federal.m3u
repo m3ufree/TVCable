@@ -1,0 +1,15 @@
+#EXTM3U
+#EXTINF:-1 tvg-group="Проверка",Проверка плеера (HLS)
+https://test-streams.mux.dev/x36bmy/playlist.m3u8
+#EXTINF:-1 tvg-group="Федеральные",Россия 1
+http://vgtrkregion-reg.cdnvideo.ru/vgtrk/HO3gcQAHbok/russia1-sd/index.m3u8
+#EXTINF:-1 tvg-group="Федеральные",Россия 1 HD
+http://vgtrkregion-reg.cdnvideo.ru/vgtrk/0/russia1-hd/1080p.m3u8
+#EXTINF:-1 tvg-group="Федеральные",НТВ
+http://cdn.ntv.ru/ntv0/tracks-v3a1/mono.m3u8
+#EXTINF:-1 tvg-group="Федеральные",Первый канал (замени ссылку)
+http://tvcable-node/streams/pervyi.m3u8
+#EXTINF:-1 tvg-group="Федеральные",Матч ТВ (замени ссылку)
+http://tvcable-node/streams/matchtv.m3u8
+#EXTINF:-1 tvg-group="Федеральные",Пятый канал (замени ссылку)
+http://tvcable-node/streams/pyaty.m3u8

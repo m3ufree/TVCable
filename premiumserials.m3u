@@ -1,0 +1,9 @@
+#EXTM3U
+#EXTINF:-1 tvg-group="Сериалы",Демо-поток Sintel (тест кино)
+https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8
+#EXTINF:-1 tvg-group="Сериалы",Start Air (замени ссылку)
+http://tvcable-node/streams/startair.m3u8
+#EXTINF:-1 tvg-group="Сериалы",World (замени ссылку)
+http://tvcable-node/streams/world.m3u8
+#EXTINF:-1 tvg-group="Сериалы",Amedia 1 (замени ссылку)
+http://tvcable-node/streams/amedia1.m3u8

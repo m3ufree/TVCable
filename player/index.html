@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPTV Player</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <aside id="sidebar">
+        <div id="playlist-controls">
+            <input type="text" id="playlist-url" placeholder="URL M3U-плейлиста">
+            <div class="row">
+                <button id="btn-load-url" title="Загрузить по URL">Загрузить</button>
+                <label class="file-btn" title="Открыть локальный файл">
+                    Файл<input type="file" id="playlist-file" accept=".m3u,.m3u8,.txt" hidden>
+                </label>
+            </div>
+        </div>
+        <input type="search" id="search" placeholder="Поиск каналов...">
+        <div class="row tabs">
+            <button class="tab active" data-tab="all">Все</button>
+            <button class="tab" data-tab="fav">★</button>
+        </div>
+        <div id="group-list"></div>
+        <ul id="channel-list"></ul>
+        <div id="status"></div>
+    </aside>
+    <main id="player-area">
+        <video id="video" controls muted></video>
+        <div id="now-playing" class="hidden">
+            <img id="logo" alt="" hidden>
+            <div id="np-text">
+                <div id="np-name"></div>
+                <div id="np-group"></div>
+            </div>
+            <div id="np-actions">
+                <button id="btn-fav" title="В избранное">★</button>
+                <button id="btn-fullscreen" title="На весь экран">⛶</button>
+                <button id="btn-pip" title="Картинка в картинке">⧉</button>
+            </div>
+        </div>
+    </main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
